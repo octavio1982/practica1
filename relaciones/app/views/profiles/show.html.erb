@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1 align="center">Perfiles [Reporte]</h1>
+<hr width="60%"></hr>
+<br/>
+<br/>
+
+<table align="center" border="1">
+  <tr>
+    <td><b>Nombre:</b></td>
+    <td><%= @profile.name %></td>
+  </tr>
+  <tr>
+    <td><b>Apellido:</b></td>
+    <td><%= @profile.lastname %></td>
+  </tr>
+  <tr>
+    <td><b>Email:</b></td>
+    <td><%= @profile.email %></td>
+  </tr>
+  <tr>
+    <td><b>Direcci&oacute;n:</b></td>
+    <td><%= @profile.address %></td>
+  </tr>
+  <tr>
+    <td align="center"><%= link_to 'Editar', edit_profile_path(@profile) %> </td>
+    <td align="center"><%= link_to 'Cancelar', profiles_path %></td>
+  </tr>
+</table>

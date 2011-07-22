@@ -1,0 +1,59 @@
+<%= form_for(@transaction) do |f| %>
+  <% if @transaction.errors.any? %>
+<div align="center">
+    <div id="error_explanation" align="left">
+      <h2 align="center"><%= pluralize(@transaction.errors.count, "error") %> evitaron que esta Transacci&oacute;n se guardara:</h2>
+      <ul>
+      <% @transaction.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+
+</div>
+  <% end %>
+
+
+<table border="1" align="center">
+  <tr>
+    <td><b><%= f.label "Perfil" %></b></td>
+    <%
+
+       prof = Profile.all
+         if !prof.empty?
+    %>
+           <td><%= f.select(:profile_id, options_for_select([["-- Selecciona un Perfil --",-1]] + Profile.all.collect {|p| [p.name+' '+p.lastname, p.id]}, :selected=>@transaction.profile_id)) %> </td>
+    <%
+       else
+     %>
+      <td><font color="#ff0000">No hay Perfiles creados todavia en la base de datos</font></td>
+    <%
+      end
+    %>
+  </tr>
+  <tr>
+    <td><b><%= f.label "Cantidad" %></b></td>
+    <td><%= f.text_field :ammount %></td>
+  </tr>
+  <tr>
+    <td colspan="2"><hr/></td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <table border="0" align="center">
+        <tr>
+          <td align="center"> <%= f.submit "Guardar Transaccion" %></td>
+            <td>&nbsp;</td>
+            <td align="center"><input type="reset" value="Deshacer"/></td>
+        </tr>
+      </table>
+
+    </td>
+
+  </tr>
+
+</table>
+
+
+ 
+<% end %>

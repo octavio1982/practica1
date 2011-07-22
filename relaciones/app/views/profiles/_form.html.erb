@@ -1,0 +1,60 @@
+<%= form_for(@profile) do |f| %>
+
+  <% if @profile.errors.any? %>
+<div align="center">
+    <div id="error_explanation" align="left">
+      <h2><%= pluralize(@profile.errors.count, "error") %> evitaron que este Perfil se guaradara:</h2>
+
+      <ul>
+      <% @profile.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+</div>
+  <% end %>
+
+<table border="1" align="center">
+  <tr>
+    <td><b>Nombre</b></td>
+    <td><%= f.text_field :name %></td>
+  </tr>
+  <tr>
+    <td><b>Apellido</b></td>
+    <td> <%= f.text_field :lastname %></td>
+  </tr>
+  <tr>
+    <td><b>Email</b></td>
+    <td> <%= f.text_field :email %></td>
+  </tr>
+  <tr>
+    <td><b>Direcci&oacute;n</b></td>
+    <td> <%= f.text_field :address %></td>
+  </tr>
+  <tr>
+    <td colspan="2"><hr /></td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <table border="0" align="center">
+        <tr>
+          <td align="center"> <%= f.submit "Guardar Perfil" %></td>
+            <td>&nbsp;</td>
+            <td align="center"><input type="reset" value="Deshacer"/></td>
+        </tr>
+      </table>
+    </td>
+  </tr>  
+</table>
+
+
+<div class="field">
+   <!-- f.label :lastname //-->
+   
+  </div>
+
+  <div class="actions">
+   
+  </div>
+<br/>
+<% end %>

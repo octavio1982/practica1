@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1 align="center">Transacci&oacute;n [Reporte]</h1>
+<hr width="60%"></hr>
+<br/>
+<table border="1" align="center">
+  <tr>
+    <td><b>Perfil</b></td>
+    <td>
+        <% profile = Profile.find(@transaction.profile_id)   %>
+        <%= profile.name %> <%= profile.lastname %>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Cantidad:</b></td>
+    <td> <%= @transaction.ammount %></td>
+  </tr>
+  <tr>
+    <td colspan="2"><hr/></td>
+  </tr>
+  <tr>
+    <td align="center"><%= link_to 'Editar', edit_transaction_path(@transaction) %></td>
+    <td align="center"><%= link_to 'Regresar', transactions_path %></td>
+  </tr>
+</table>
+ 
+

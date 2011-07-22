@@ -1,0 +1,121 @@
+ <%
+   prof = Profile.all
+   if !prof.empty?
+     tran = Transaction.all
+       if !tran.empty?
+ %>
+<h1 align="center">Transacciones mayores a $40,000</h1>
+<hr width="60%"></hr>
+<br/>
+<br/>
+
+<table border="1" align="center">
+<% @transactio= Transaction.where("ammount > ?", 40000) %><!-- Aqui tramos solo montos mayores a 40,000, quitarla para todos los usuarios //-->
+<%  if @transactio.empty? %>
+ <table align="center" boder="1">
+    <tr>
+      <td align="center"><font color="#0000ff">No hay ninguna Transacci&oacute;n mayor a $40,000 todav&iacute;a</font></td>
+    </tr>
+  </table>
+<% else %>
+  <tr>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Email </th>
+    <th>Direcci&oacute;n</th>
+    <th>Cantidad</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @transactio.each do |transaction| %>  <!-- Aqui hacemos el ciclo //-->
+  <tr>
+    <td>
+      <% profile = Profile.find(transaction.profile_id)   %>
+      <%= profile.name %>
+    </td>
+    <td><%= profile.lastname %></td>
+    <td><%= profile.email %></td>
+    <td><%= profile.address %></td>
+    <td><%= transaction.ammount %></td>
+    <td><%= link_to 'Mostrar', transaction %></td>
+    <td><%= link_to 'Editar', edit_transaction_path(transaction) %></td>
+    <td><%= link_to 'Borrar', transaction, :confirm => 'Estas seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<br/>
+<br/>
+<hr/>
+<br/>
+<br/>
+<% end %>
+<h1 align="center">Transacciones menores o iguales que $40,000</h1>
+<hr width="60%"></hr>
+<br/>
+<br/>
+
+<% @transactio= Transaction.where("ammount <= ?", 40000) %><!-- Aqui tramos solo montos mayores a 40,000, quitarla para todos los usuarios //-->
+<%  if @transactio.empty? %>
+ <table align="center" boder="1">
+    <tr>
+      <td align="center"><font color="#0000ff">No hay ninguna Transacci&oacute;n menor a $40,000 todav&iacute;a</font></td>
+    </tr>
+  </table>
+<% else %>
+<table border="1" align="center">
+  <tr>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Email</th>
+    <th>Direcci&oacute;n</th>
+    <th>Cantidad</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @transactio.each do |transaction| %>  <!-- Aqui hacemos el ciclo //-->
+  <tr>
+    <td>
+      <% profile = Profile.find(transaction.profile_id)   %>
+      <%= profile.name %>
+    </td>
+    <td><%= profile.lastname %></td>
+    <td><%= profile.email %></td>
+    <td><%= profile.address %></td>
+    <td><%= transaction.ammount %></td>
+    <td><%= link_to 'Mostrar', transaction %></td>
+    <td><%= link_to 'Editar', edit_transaction_path(transaction) %></td>
+    <td><%= link_to 'Borrar', transaction, :confirm => 'Estas seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<% end %>
+<% else %>
+   <table align="center" boder="1">
+    <tr>
+      <td align="center"><font color="#ff0000">No hay ninguna Transacci&oacute todavia en el sistema.</font></td>
+    </tr>
+  </table>
+<% end %>
+<% else %>
+
+ <table align="center" boder="1">
+    <tr>
+      <td align="center"><font color="#ff0000">No hay ning&uacute;n Perfil todavia en el sistema.<br/>Para hacer una Transacci&oacute;n se necesita al menos de un Perfil</font></td>
+    </tr>
+  </table>
+<% end %>
+
+<br />
+<br/>
+<hr/>
+<br/>
+<br/>
+<p align="center">
+<%= link_to 'Nueva Transaccion', new_transaction_path %> |
+<%= link_to 'Perfiles', profiles_path, :type=>"button" %>
+</p>

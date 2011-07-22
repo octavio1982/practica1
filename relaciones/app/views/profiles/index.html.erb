@@ -1,0 +1,46 @@
+<h1 align="center">Perfiles [Listado]</h1>
+<hr width="60%"></hr>
+<br/>
+<br/>
+
+<%
+ prof = Profile.all
+  if !prof.empty?
+ %>
+  
+<table border="1" align="center">
+  <tr>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Email</th>
+    <th>Direcci&oacute;n</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @profiles.each do |profile| %>
+  <tr>
+    <td><%= profile.name %></td>
+    <td><%= profile.lastname %></td>
+    <td><%= profile.email %></td>
+    <td><%= profile.address %></td>
+    <td><%= link_to 'Mostrar', profile %></td>
+    <td><%= link_to 'Editar', edit_profile_path(profile) %></td>
+    <td><%= link_to 'Borrar', profile, :confirm => 'Estas seguro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<% else %>
+  <table align="center" boder="1">
+    <tr>
+      <td><font color="#ff0000">No hay ning&uacute; Perfil todavia en el sistema</font></td>
+    </tr>
+  </table>
+<% end %>
+<br/>
+<br/>
+<p align="center">
+<%= link_to 'Nuevo Perfil', new_profile_path %> |
+<%= link_to 'Transacciones', transactions_path, :type=>"button" %>
+</p>
